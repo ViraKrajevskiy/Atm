@@ -11,11 +11,12 @@ class MoneyNominal:
     }
 
     @classmethod
-    def get_money_nominal(cls,money_nomi):
-        return cls.Money_nominal.get(money_nomi,"Неизвестный_номинал")
+    def get_money_nominal(cls, money_nomi):
+        return cls.Money_nominal.get(money_nomi, "Неизвестный_номинал")
+
 
 class CardMoney:
-    def __init__(self,card_id , card_name, card_number, card_work_time, password, balance, card_type, phone_number):
+    def __init__(self, card_id, card_name, card_number, card_work_time, password, balance, card_type, phone_number):
         self.card_id = card_id
         self.card_name = card_name
         self.card_number = card_number
@@ -24,6 +25,7 @@ class CardMoney:
         self.balance = balance
         self.card_type = card_type
         self.phone_number = phone_number
+
 
 class Money:
     def __init__(self, user_money_balance, money_nomi, count):
@@ -37,7 +39,3 @@ class Money:
 
     def __str__(self):
         return f"{self.count} x {self.money} = {self.total_balance()} сум"
-
-
-
-

@@ -33,7 +33,7 @@ class Account:
                 f"Наличные: {self.total_cash()} сум")
 
 class BaseUser:
-    def __init__(self, firstname, surname, lastname, phone, paper_money, role_id, card: CardMoney, wallet: list[Money] , account:Account ):
+    def __init__(self, firstname, surname, lastname, phone, paper_money, role_id, card: CardMoney, wallet: list[Money], account: Account):
         if role_id not in Role.roles:
             raise ValueError(f"Неверный role_id: {role_id}. Допустимые значения: {list(Role.roles.keys())}")
 
@@ -57,5 +57,3 @@ class BaseUser:
 
     def total_balance(self):
         return self.paper_money + self.card.balance + sum(m.total_balance() for m in self.wallet)
-
-

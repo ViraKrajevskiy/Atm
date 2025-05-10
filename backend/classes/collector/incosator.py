@@ -1,11 +1,11 @@
-from Atm.backend.classes.bank_class.Card_and_money import Money, CardMoney
+from Atm.backend.classes.bank_class.Card_and_money import CardMoney, Money
 from Atm.backend.classes.user_class.users import Role
 
 
-class BankWorker:
+class CashCollector:
     def __init__(self, firstname, surname, lastname, phone, role_id, card: CardMoney, wallet: list[Money]):
-        if role_id != 3:
-            raise ValueError("Только работник банка может быть BankWorker (role_id должен быть 3)")
+        if role_id != 2:
+            raise ValueError("Только инкассатор может быть CashCollector (role_id должен быть 2)")
 
         self.firstname = firstname
         self.surname = surname
@@ -24,4 +24,4 @@ class BankWorker:
         return self.card.balance + sum(m.total_balance() for m in self.wallet)
 
     def user_permissions(self):
-        return "Может пополнять банкомат, просматривать состояние банкоматов и управлять ими"
+        return "Может забирать деньги из банкоматов и пополнять кассу банка"

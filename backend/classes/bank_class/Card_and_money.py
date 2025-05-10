@@ -16,7 +16,7 @@ class MoneyNominal:
     def get_money_nominal(cls,money_nomi):
         return cls.Money_nominal.get(money_nomi,"Неизвестный_номинал")
 
-class CardAndMoney:
+class CardMoney:
     def __init__(self,card_id , card_name, card_number, card_work_time, password, balance, card_type, phone_number):
         self.card_id = card_id
         self.card_name = card_name
@@ -39,3 +39,24 @@ class Money:
 
     def __str__(self):
         return f"{self.count} x {self.money} = {self.total_balance()} сум"
+
+
+class Account:
+    _id_counter = count(1)
+
+    def __init__(self, user, card: CardMoney, wallet: list[Money]):
+        if user.role_id != 1:
+            raise ValueError("Только обычный пользователь может иметь Account")
+        self.account_id = next(Account._id_counter)
+        self.user = user  # экземпляр BaseUser
+        self.card = card  # экземпляр CardMoney
+        self.wallet = wallet  # список экземпляров Money
+
+    def total_cash(self):
+        return sum(m.total_balance() for m in self.wallet)
+
+    def __str__(self):
+        return (f"Аккаунт #{self.account_id} — {self.user.firstname} {self.user.surname} ({self.user.role})\n"
+                f"Баланс карты: {self.card.balance} сум\n"
+                f"Наличные: {self.total_cash()} сум")
+
